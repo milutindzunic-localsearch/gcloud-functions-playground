@@ -46,5 +46,5 @@ jobs:
         # Environment - public config
         env_vars_file: './env/dev.yaml'
         # Environment - secrets
-        secret_environment_variables: 'TEST_API_KEY=projects/${{ secrets.GCP_PROJECT_ID }}/secrets/test-apikey/versions/1'
+        secret_environment_variables: 'TEST_API_KEY=projects/${{ secrets.GCP_PROJECT_ID }}/secrets/test-apikey'
         
