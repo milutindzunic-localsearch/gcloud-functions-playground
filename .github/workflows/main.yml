@@ -41,5 +41,6 @@ jobs:
         region: 'europe-west6'
         # Triggers to topic
         event_trigger_type: 'google.pubsub.topic.publish'
-        event_trigger_resource: 'milutin-test'
+        event_trigger_resource: 'projects/${{ secrets.GCP_PROJECT_ID }}/topics/milutin-test'
+        event_trigger_service: 'pubsub.googleapis.com'
         
