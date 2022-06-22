@@ -3,6 +3,7 @@ package pubsub
 import (
 	"context"
 	"log"
+	"os"
 )
 
 // PubSubMessage is the payload of a Pub/Sub event.
@@ -14,6 +15,8 @@ type PubSubMessage struct {
 
 // HelloPubSub consumes a Pub/Sub message.
 func HelloPubSub(ctx context.Context, m PubSubMessage) error {
+	log.Printf("Environment: %s", os.Environ())
+
 	name := string(m.Data) // Automatically decoded from base64.
 	if name == "" {
 		name = "World"
