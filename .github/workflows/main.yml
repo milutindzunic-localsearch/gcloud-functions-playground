@@ -39,3 +39,7 @@ jobs:
         runtime: 'go116'
         source_dir: './functions/pubsub'
         region: 'europe-west6'
+        # Triggers to topic
+        event_trigger_type: 'google.pubsub.topic.publish'
+        event_trigger_resource: 'milutin-test'
+        
