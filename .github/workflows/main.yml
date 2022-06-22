@@ -1,0 +1,46 @@
+# This is a basic workflow to help you get started with Actions
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  deploy_as_gcp_cloud_function:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    
+    steps:
+    # Check-out the repository under $GITHUB_WORKSPACE
+    - uses: 'actions/checkout@v3'
+
+    # Authenticate with GCP
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+    # Deploy as a GCP Cloud Function
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-cloud-functions@v0'
+      with:
+        # Deploy the PubSub Hello World example
+        name: 'HelloPubSub'
+        runtime: 'go116'
+        source_dir: './functions/pubsub'
+        region: 'europe-west6'
+        # Triggers to topic
+        event_trigger_type: 'google.pubsub.topic.publish'
+        event_trigger_resource: 'projects/${{ secrets.GCP_PROJECT_ID }}/topics/milutin-test'
+        event_trigger_service: 'pubsub.googleapis.com'
+        
