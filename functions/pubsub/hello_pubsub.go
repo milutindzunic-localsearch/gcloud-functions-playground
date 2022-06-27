@@ -19,7 +19,7 @@ type PubSubMessage struct {
 func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 	log.Printf("Environment: %s", os.Environ())
 
-	onlimUrl, ok := os.LookupEnv("onlim.url")
+	onlimUrl, ok := os.LookupEnv("ONLIM_URL")
 	if !ok {
 		log.Fatal("Onlim url not set!")
 	}
