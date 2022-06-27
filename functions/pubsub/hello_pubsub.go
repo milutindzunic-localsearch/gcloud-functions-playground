@@ -2,7 +2,9 @@ package pubsub
 
 import (
 	"context"
+	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 )
 
@@ -17,10 +19,33 @@ type PubSubMessage struct {
 func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 	log.Printf("Environment: %s", os.Environ())
 
+	onlimUrl, ok := os.LookupEnv("onlim.url")
+	if !ok {
+		log.Fatal("Onlim url not set!")
+	}
+
+	// do something...
+	pingOnlim(onlimUrl)
+
 	name := string(m.Data) // Automatically decoded from base64.
 	if name == "" {
 		name = "World"
 	}
 	log.Printf("Hello, %s!", name)
 	return nil
+}
+
+func pingOnlim(onlimUrl string) {
+	resp, err := http.Get(onlimUrl)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	sb := string(body)
+	log.Printf("Response: %s", sb)
 }

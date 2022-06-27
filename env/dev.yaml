@@ -1,3 +1,2 @@
-KEY1: VALUE1
-KEY2: VALUE2
-JSONKEY: '{"bar":"baz"}'
+onlim:
+  url: https://www.google.com
