@@ -39,7 +39,7 @@ func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 
 	if err != nil {
 		// TODO: we want to handle errors in some way
-		return nil
+		log.Fatalf("Cannot export to onlim: %v", err)
 	}
 
 	return nil
