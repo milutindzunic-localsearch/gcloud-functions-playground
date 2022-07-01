@@ -9,6 +9,7 @@ import (
 
 // HelloHTTP is an HTTP Cloud Function with a request parameter.
 func HelloHTTP(w http.ResponseWriter, r *http.Request) {
+	// TODO: do we need this entrypoint?
 	var d struct {
 		Name string `json:"name"`
 	}
