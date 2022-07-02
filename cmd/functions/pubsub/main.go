@@ -2,7 +2,7 @@ package pubsub
 
 import (
 	"context"
-	"gcloud-functions-playground/onlim"
+	"github.com/milutindzunic-localsearch/gcloud-functions-playground/onlim"
 	"github.com/spf13/viper"
 	"log"
 	"strings"

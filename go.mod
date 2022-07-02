@@ -1,4 +1,4 @@
-module gcloud-functions-playground
+module github.com/milutindzunic-localsearch/gcloud-functions-playground
 
 go 1.16
 
