@@ -37,7 +37,7 @@ jobs:
         # Deploy the PubSub Hello World example
         name: 'HelloPubSub'
         runtime: 'go116'
-        source_dir: './cmd/functions/pubsub'
+        source_dir: './onlim'
         region: 'europe-west6'
         # Triggers to topic
         event_trigger_type: 'google.pubsub.topic.publish'
