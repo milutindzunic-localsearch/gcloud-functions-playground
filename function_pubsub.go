@@ -30,6 +30,7 @@ func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 	fmt.Println(os.Environ())
 
 	var config Config
+	viper.AutomaticEnv()
 	err := viper.Unmarshal(&config)
 	if err != nil {
 		log.Fatalf("Unable to decode config: %v", err)
