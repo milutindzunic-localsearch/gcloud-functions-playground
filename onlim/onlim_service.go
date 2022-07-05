@@ -68,7 +68,7 @@ func (s *onlimService) exportToOnlim(localEntry LocalEntry) error {
 		return fmt.Errorf("got invalid status code:  CODE=%d", res.StatusCode)
 	}
 
-	fmt.Println("Response received: %d", res.StatusCode)
+	fmt.Printf("Response received: %d\n", res.StatusCode)
 
 	return nil
 }
