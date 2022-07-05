@@ -45,6 +45,8 @@ func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 	// TODO: remove me
 	log.Printf("Config: %s\n", config)
 
+	log.Printf("LocalEntry: %s\n", m.LocalEntry)
+
 	onlimService := onlim.NewService(config.OnlimApiURL, config.OnlimApiKey, toCategoryIDs(config.AcceptedCategoryIDs))
 	err = onlimService.Export(m.LocalEntry)
 
