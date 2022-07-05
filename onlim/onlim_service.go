@@ -33,8 +33,13 @@ func NewService(apiURL string, apiKey string, acceptedCategories []CategoryID) *
 
 func (s *onlimService) Export(localEntry LocalEntry) error {
 
-	if !localEntry.IsBusiness() || !localEntry.HasOneOf(s.AcceptedCategories) {
-		return fmt.Errorf("LocalEntry is not a business or doesn't have the appropriate categories")
+	if !localEntry.IsBusiness() {
+		return fmt.Errorf("LocalEntry is not a business")
+	}
+
+	if !localEntry.HasOneOf(s.AcceptedCategories) {
+		return fmt.Errorf("LocalEntry doesn't have the appropriate categories. Accepted=%v, Found=%v",
+			s.AcceptedCategories, append(localEntry.primaryCategoryIDs(), localEntry.secondaryCategoryIDs()...))
 	}
 
 	return s.exportToOnlim(localEntry)
