@@ -2,9 +2,11 @@ package functions
 
 import (
 	"context"
+	"fmt"
 	"github.com/milutindzunic-localsearch/gcloud-functions-playground/onlim"
 	"github.com/spf13/viper"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -24,6 +26,8 @@ type Config struct {
 // HelloPubSub is the entrypoint triggered by the Pub/Sub message.
 func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 	log.Println("Received Pub/Sub message!")
+
+	fmt.Println(os.Environ())
 
 	var config Config
 	err := viper.Unmarshal(&config)
