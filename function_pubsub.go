@@ -31,6 +31,12 @@ func HelloPubSub(ctx context.Context, m PubSubMessage) error {
 
 	var config Config
 	viper.AutomaticEnv()
+	_ = viper.BindEnv("ONLIM_API_URL")
+	_ = viper.BindEnv("ONLIM_API_KEY")
+	_ = viper.BindEnv("ACCEPTED_CATEGORY_IDS")
+	viper.SetDefault("ONLIM_API_URL", "")
+	viper.SetDefault("ONLIM_API_KEY", "")
+	viper.SetDefault("ACCEPTED_CATEGORY_IDS", "")
 	err := viper.Unmarshal(&config)
 	if err != nil {
 		log.Fatalf("Unable to decode config: %v", err)
