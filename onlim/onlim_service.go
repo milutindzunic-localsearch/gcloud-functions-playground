@@ -3,6 +3,8 @@ package onlim
 import (
 	"bytes"
 	"fmt"
+	"io"
+	"log"
 	"net/http"
 	"net/url"
 	"time"
@@ -66,11 +68,20 @@ func (s *onlimService) exportToOnlim(localEntry LocalEntry) error {
 
 	res, err := client.Do(req)
 	if err != nil {
-		return fmt.Errorf("got error:  %s", err.Error())
+		return fmt.Errorf("HTTP call to Onlim failed: %s", err.Error())
 	}
 
-	if res.StatusCode != 200 {
-		return fmt.Errorf("got invalid status code:  CODE=%d", res.StatusCode)
+	defer res.Body.Close()
+
+	succeeded := res.StatusCode >= 200 && res.StatusCode < 300
+	if !succeeded {
+		errorBody, err := io.ReadAll(res.Body)
+		if err != nil {
+			// TODO: log ili fmt, ti vidi sam... ali neka bude svuda isto
+			log.Fatal(err)
+		}
+
+		return fmt.Errorf("Received error from HTTP call to Onlim:  CODE=%d, BODY=%s", res.StatusCode, errorBody)
 	}
 
 	fmt.Printf("Response received: %d\n", res.StatusCode)
