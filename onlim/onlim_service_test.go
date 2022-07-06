@@ -12,7 +12,7 @@ import (
 func TestService_Export(t *testing.T) {
 	apiKey := "someapikey"
 	acceptedCategoryIDs := []CategoryID{"75zEg3pk2lD7TdUrSzVkpQ", "_jyVPD-o3FF916UGAMIGsg"}
-	expectedRequestBody := []byte(fmt.Sprintf(`"items": [ %s ]`, businessLocalEntry))
+	expectedRequestBody := []byte(fmt.Sprintf(`{ "items": [ %s ] }`, businessLocalEntry))
 
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Header.Get("accept") != "application/json" {

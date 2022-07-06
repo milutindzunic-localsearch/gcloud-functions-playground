@@ -54,7 +54,7 @@ func (s *onlimService) exportToOnlim(localEntry LocalEntry) error {
 
 	// sending the LocalEntry as a single item in the request
 	// TODO: try to serialize as a map
-	body := fmt.Sprintf(`"items": [ %s ]`, localEntry)
+	body := fmt.Sprintf(`{ "items": [ %s ] }`, localEntry)
 
 	req, err := http.NewRequest(http.MethodPost, s.ApiURL, bytes.NewBuffer([]byte(body)))
 	if err != nil {
