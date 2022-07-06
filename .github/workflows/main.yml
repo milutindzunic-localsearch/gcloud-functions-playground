@@ -42,7 +42,7 @@ jobs:
         event_trigger_type: 'google.pubsub.topic.publish'
         event_trigger_resource: 'projects/${{ secrets.GCP_PROJECT_ID }}/topics/milutin-test'
         event_trigger_service: 'pubsub.googleapis.com'
-        # Environment - public config
+        # Environment - public conf
         env_vars_file: './env/dev.yaml'
         # Environment - secrets
         secret_environment_variables: 'ONLIM_API_KEY=projects/${{ secrets.GCP_PROJECT_ID }}/secrets/onlim-apikey'
